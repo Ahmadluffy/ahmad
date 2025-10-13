@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A friendly one-page site about AI — now with images, animations, and sound." />
+  <meta name="theme-color" content="#0b5cff" />
+  <title>AI 101 — Interactive</title>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    :root{
+      --bg: #0a0d14;
+      --card: #0f1423;
+      --ink: #eaf1ff;
+      --muted: #95a7cd;
+      --brand: #0b5cff;
+      --brand-2: #00d4ff;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0,0,0,.18);
+    }
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--ink);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    .bg-anim{
+      position: fixed; inset: -20% -20% auto -20%;
+      height: 120vh; z-index: -1;
+      background:
+        radial-gradient(40vw 40vw at 15% 15%, rgba(11,92,255,.22), transparent 60%),
+        radial-gradient(40vw 40vw at 85% 10%, rgba(0,212,255,.20), transparent 60%),
+        radial-gradient(50vw 50vw at 50% 90%, rgba(80, 0, 255,.18), transparent 60%);
+      animation: float-bg 20s linear infinite alternate;
+      filter: blur(20px) saturate(120%);
+    }
+    @keyframes float-bg{
+      0%   { transform: translateY(-2%) rotate(0.5deg) scale(1.02); }
+      100% { transform: translateY(2%)  rotate(-0.5deg) scale(1.04); }
+    }
+
+    header{
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(120%) blur(10px);
+      background: linear-gradient(to bottom, rgba(10,13,20,.85), rgba(10,13,20,.55));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .container{ max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .nav{ display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand{ display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; }
+    .logo{ width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px;
+      background: conic-gradient(from 20deg, var(--brand), var(--brand-2));
+      color: white; font-weight: 900; box-shadow: var(--shadow);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{ transform: scale(1); }
+      50%{ transform: scale(1.06); filter: drop-shadow(0 0 12px rgba(11,92,255,.35)); }
+    }
+
+    nav ul{ list-style: none; display: flex; gap: 18px; padding: 0; margin: 0; }
+    nav a{ text-decoration: none; padding: 10px 14px; border-radius: 10px; color: #dce7ff; }
+    nav a:hover{ background: rgba(255,255,255,.08); }
+
+    .hero{ padding: 70px 0 40px; }
+    .hero-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:34px; align-items:center; }
+    h1{ font-size: clamp(28px, 5vw, 46px); color:#f4f7ff; }
+    .lead{ color:#c9d6f4; font-size: 18px; margin-bottom: 30px; }
+
+    .btn{
+      border:none; cursor:pointer; font-weight:700;
+      padding:13px 18px; border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2)); color:#fff;
+      box-shadow: var(--shadow);
+      transition: transform .06s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+
+    .viz{ background:rgba(255,255,255,.05); border-radius:18px; padding:20px; box-shadow:var(--shadow); }
+
+    section{ padding:60px 0; }
+    .section-title{ font-size: 32px; color: #eef3ff; }
+    .cards{ display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:18px; }
+    .card{ background: var(--card); border-radius: var(--radius); padding:18px; box-shadow: var(--shadow); }
+
+    .gallery{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+    .gallery figure{ margin:0; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,.08); }
+
+    footer{ padding: 40px 0; color: #a9b8d5; border-top: 1px solid rgba(255,255,255,.08); text-align:center; }
+
+    .sound-pill{
+      display:inline-flex; align-items:center; gap:10px;
+      background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18);
+      padding:10px 12px; border-radius:999px; color:#dfe7ff;
+    }
+    .led{ width:10px; height:10px; border-radius:999px; background:#ef4444; transition: background .25s ease; }
+    .led.on{ background:#18b26b; box-shadow: 0 0 10px 2px rgba(24,178,107,.6); }
+  </style>
+</head>
+<body>
+  <div class="bg-anim" aria-hidden="true"></div>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#"><span class="logo">AI</span><span>AI 101</span></a>
+      <nav>
+        <ul>
+          <li><a href="#what">What is AI?</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#learn">Learn</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Interactive AI Guide — with Motion & Sound</h1>
+          <p class="lead">Enjoy animations, visuals, and sounds while learning about AI.</p>
+          <button class="btn" id="pingBtn">Play Click Sound</button>
+          <button class="btn sound-pill" id="ambienceBtn"><span class="led"></span>Ambient Pad</button>
+        </div>
+        <div class="viz">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Artificial_Intelligence_logo.svg" alt="AI illustration">
+        </div>
+      </div>
+    </section>
+
+    <section id="what">
+      <div class="container">
+        <h2 class="section-title">What is AI?</h2>
+        <div class="cards">
+          <div class="card"><h4>Machine Learning</h4><p>Algorithms that learn from data.</p></div>
+          <div class="card"><h4>Deep Learning</h4><p>Neural networks for complex learning.</p></div>
+          <div class="card"><h4>Natural Language</h4><p>Computers that understand human language.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery">
+          <figure><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="AI concept"></figure>
+          <figure><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b" alt="AI circuits"></figure>
+          <figure><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="Data center"></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="learn">
+      <div class="container">
+        <h2 class="section-title">Learn AI</h2>
+        <p>Start small: Python, math, ML basics, and ethics. Build projects and grow step by step.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>© <span id="y"></span> AI 101 • With motion & sound.</p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const y = document.getElementById('y'); y.textContent = new Date().getFullYear();
+
+    let audioCtx;
+    function setupAudio(){
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    function ping(){
+      setupAudio();
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.frequency.setValueAtTime(880, now);
+      osc.frequency.exponentialRampToValueAtTime(1760, now + 0.12);
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.22);
+    }
+
+    let ambience = false, padOsc1, padOsc2, padGain;
+    function toggleAmbience(){
+      setupAudio();
+      if(!ambience){
+        padOsc1 = audioCtx.createOscillator();
+        padOsc2 = audioCtx.createOscillator();
+        padGain = audioCtx.createGain();
+        padOsc1.type = "sine"; padOsc2.type = "triangle";
+        padOsc1.frequency.value = 196; padOsc2.frequency.value = 246.94;
+        padGain.gain.value = 0.1;
+        padOsc1.connect(padGain).connect(audioCtx.destination);
+        padOsc2.connect(padGain);
+        padOsc1.start(); padOsc2.start();
+        ambience = true;
+        document.querySelector('.led').classList.add('on');
+      } else {
+        padOsc1.stop(); padOsc2.stop();
+        ambience = false;
+        document.querySelector('.led').classList.remove('on');
+      }
+    }
+
+    document.getElementById('pingBtn').addEventListener('click', ping);
+    document.getElementById('ambienceBtn').addEventListener('click', toggleAmbience);
+  </script>
+</body>
+</html>
