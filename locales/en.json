@@ -1,0 +1,29 @@
+{
+  "meta": { "dir": "ltr", "name": "English", "lang": "en" },
+  "hero": {
+    "title": "Pure Mountain Spring Water",
+    "sub": "Bottled at the source. Untouched by anything but light.",
+    "scroll": "Scroll"
+  },
+  "features": {
+    "title": "100% Natural Source & Advanced Ozone Treatment",
+    "keyword": "Ozone",
+    "body": "Drawn from protected highland springs and purified with advanced ozone treatment — nothing added, nothing lost.",
+    "points": [
+      "Protected natural spring source",
+      "Advanced ozone purification",
+      "Balanced natural minerals"
+    ]
+  },
+  "splash": { "word": "Refresh" },
+  "cta": {
+    "title": "Cold. Clear. Rovian.",
+    "promise": "Premium 0.5L natural spring water, delivered refrigerator-fresh.",
+    "button": "Order Now",
+    "find": "Find Rovian"
+  },
+  "footer": {
+    "contact": "hello@rovianwater.com",
+    "rights": "© 2026 Rovian Spring Water. All rights reserved."
+  }
+}
